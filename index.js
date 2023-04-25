@@ -89,7 +89,6 @@ app.put('/api/v3/app/events/:event_id', upload.single('image'), async (req, res)
   }
 });
 
-// DELETE endpoint to delete an event by its unique id
 // PUT route to update an event
 app.put('/api/v3/app/events/:id', upload.single('image'), async (req, res) => {
   try {
@@ -123,7 +122,7 @@ app.put('/api/v3/app/events/:id', upload.single('image'), async (req, res) => {
   }
 });
 
-// DELETE route to delete an event
+// DELETE endpoint to delete an event by its unique id
 app.delete('/api/v3/app/events/:id', async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
@@ -131,7 +130,7 @@ app.delete('/api/v3/app/events/:id', async (req, res) => {
       return res.status(404).json({ message: 'Event not found' });
     }
 
-    await event.remove();
+    await event.deleteOne();
     res.json({ message: 'Event deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
