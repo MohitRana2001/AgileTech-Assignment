@@ -1,9 +1,23 @@
 const mongoose = require('mongoose');
 
+const attendeesSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    age: {
+        type: Number,
+        required: true
+    }
+})
+
 const eventSchema = new mongoose.Schema({
-  uid: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  event: {
+    type: String,
+    required: true
+  },
+  event_id: {
+    type: Number,
     required: true
   },
   name: {
@@ -29,8 +43,7 @@ const eventSchema = new mongoose.Schema({
     }
   },
   moderator: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
     required: true
   },
   category: {
@@ -46,12 +59,8 @@ const eventSchema = new mongoose.Schema({
     required: true
   },
   attendees: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  }],
-  nudges: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Nudge'
+    type: [attendeesSchema],
+    required: true
   }]
 });
 
