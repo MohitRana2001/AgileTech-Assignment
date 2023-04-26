@@ -2,11 +2,14 @@ const mongoose = require('mongoose');
 
 const nudgeSchema = new mongoose.Schema({
   eventId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Event',
+    type: String,
     required: true
   },
   title: {
+    type: String,
+    required: true
+  },
+  description: {
     type: String,
     required: true
   },
@@ -18,13 +21,11 @@ const nudgeSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  description: {
-    type: String,
-    required: true
-  },
-  icon: {
-    type: String,
-    required: true
+  files: {
+    image: {
+      type: String,
+      required: true
+    }
   },
   invitation: {
     type: String,
