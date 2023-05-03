@@ -7,7 +7,7 @@ async function start() {
     const eventInstance = new 
         event({
             event: "Hackathon",
-            event_id: "23",
+            event_id: 23,
             name: "ThinkTank Ideathon",
             tagline: "Participate and win exciting goodies.",
             schedule: new Date("2023-05-01T15:00:00.000Z"),
