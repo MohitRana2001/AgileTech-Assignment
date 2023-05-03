@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
+const path = require("path");
+require('dotenv').config({path: path.resolve(__dirname,'../.env')});
 const event = require("../models/event")
 async function start() {
     
-    await mongoose.connect("mongodb+srv://mohit:1234@assignment.n16zdc6.mongodb.net/?retryWrites=true&w=majority");
+    await mongoose.connect(process.env.MONGO_URI);
     const eventInstance = new 
         event({
             event: "Hackathon",
