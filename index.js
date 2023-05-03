@@ -4,8 +4,10 @@ const multer = require('multer');
 const Event = require('./models/event');
 const Nudge = require('./models/nudge');
 const db = require('./connect');
+const bodyParser = require('body-parser');
 
 const app = express();
+app.use(bodyParser.json(),);
 const port = 3000;
 
 // Set up multer storage for image upload
@@ -44,16 +46,15 @@ app.get('/api/v3/app/events', async (req, res) => {
 // POST endpoint to create an event
 app.post(
   '/api/v3/app/events',
-  upload.single('image'),
   async (req, res) => {
+    console.log(req.body);
     const event = new Event({
+      event: req.body.event,
+      event_id: req.body.event_id,
       name: req.body.name,
       tagline: req.body.tagline,
       schedule: new Date(req.body.schedule),
       description: req.body.description,
-      files: {
-        image: req.file.filename,
-      },
       moderator: req.body.moderator,
       category: req.body.category,
       sub_category: req.body.sub_category,
@@ -68,6 +69,7 @@ app.post(
 // PUT endpoint to update an event by its unique id
 app.put('/api/v3/app/events/:event_id', upload.single('image'), async (req, res) => {
   const event = await Event.findOne({ _id: req.params.event_id });
+  console.log(event);
   if (!event) {
     res.status(404).json({ error: 'Event not found' });
   } else {
@@ -150,12 +152,7 @@ app.post('/api/v3/app/nudges', async (req, res) => {
       event_id: req.body.event_id,
       title: req.body.title,
       description: req.body.description,
-      image: {
-        data: fs.readFileSync(req.file.path),
-        contentType: req.file.mimetype,
-      },
-      send_time: req.body.send_time,
-      icon: req.body.icon,
+      timeToSend: req.body.timeToSend,
       invitation: req.body.invitation,
     });
 
