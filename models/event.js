@@ -39,7 +39,6 @@ const eventSchema = new mongoose.Schema({
   files: {
     image: {
       type: String,
-      required: true
     }
   },
   moderator: {

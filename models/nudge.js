@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const nudgeSchema = new mongoose.Schema({
-  eventId: {
+  event_id: {
     type: String,
     required: true
   },
@@ -13,19 +13,9 @@ const nudgeSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  image: {
+  timeToSend: {
     type: String,
     required: true
-  },
-  timeToSend: {
-    type: Date,
-    required: true
-  },
-  files: {
-    image: {
-      type: String,
-      required: true
-    }
   },
   invitation: {
     type: String,
